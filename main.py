@@ -1,6 +1,4 @@
-from flask import Flask
 import json
-app = Flask('app')
 
 def preprocess(strings):
     return [" ".join(string.split()).replace(",", "").replace(".", "").replace("?", "") for string in strings]
@@ -44,11 +42,8 @@ def find_modal_substring(strings, num_words, place):
     return modal_substring
 
 def processData(strings):
-  return find_modal_substring(preprocess(strings), 2, 3)
-  
+  return find_modal_substring(preprocess(strings), 2, 1)
 
-@app.route('/')
-def hello_world():
-  return json.dumps(processData(["hello channing", "hello channing", "hello brianna", "hello david", "hello channing babb", "helloo channing babb"]))
+strings = ["hello channing", "hello channing", "hello taylor", "hello david", "hello channing babb", "helloo channing babb", "wow channing babb", "channing is here"]
 
-app.run(host='0.0.0.0', port=8080)
+print(json.dumps(processData(strings)))
